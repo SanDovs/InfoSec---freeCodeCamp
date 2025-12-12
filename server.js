@@ -18,16 +18,21 @@ const someOtherPlaintextPassword = 'pass123';
 
 //START_ASYNC -do not remove notes, place code between correct pair of notes.
 
-
+app.get('/hash/:input', async (req, res) => {
+  const hash = await bcrypt.hash(req.params.input, 12);
+  res.json({ hash });
+});
 
 //END_ASYNC
 
 //START_SYNC
 
-
+app.get('/compare/:input/:hash', (req, res) => {
+  const result = bcrypt.compareSync(req.params.input, req.params.hash);
+  res.json({ result });
+});
 
 //END_SYNC
-
 
 
 
